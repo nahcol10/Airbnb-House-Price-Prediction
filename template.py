@@ -40,7 +40,7 @@ STRUCTURE = {
     "pyproject.toml": None,
     "requirements.txt": None,
     "Dockerfile": None,
-    "heroku.yaml": None,
+    "heroku.yml": None,
     "runtime.txt": None,
     ".gitignore": None,
 }
