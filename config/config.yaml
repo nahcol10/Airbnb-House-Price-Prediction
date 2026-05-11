@@ -1,0 +1,84 @@
+data:
+  raw_path: "data/Airbnb_Data.csv"
+  processed_path: "data/processed.csv"
+
+model:
+  type: "xgboost"
+  random_state: 42
+  test_size: 0.15
+  val_size: 0.15
+
+features:
+  drop_columns:
+    - "id"
+    - "thumbnail_url"
+    - "name"
+    - "description"
+
+  numeric_fill_median:
+    - "bathrooms"
+    - "bedrooms"
+    - "beds"
+    - "review_scores_rating"
+    - "host_response_rate"
+
+  categorical_fill_unknown:
+    - "neighbourhood"
+    - "zipcode"
+
+  boolean_columns:
+    - "cleaning_fee"
+    - "host_has_profile_pic"
+    - "host_identity_verified"
+    - "instant_bookable"
+
+  high_value_amenities:
+    - "Wireless Internet"
+    - "Air conditioning"
+    - "Kitchen"
+    - "Heating"
+    - "Washer"
+    - "Dryer"
+    - "Free parking on premises"
+    - "Gym"
+    - "Pool"
+    - "Hot tub"
+    - "TV"
+    - "Essentials"
+    - "Internet"
+    - "Cable TV"
+
+  date_columns:
+    - "first_review"
+    - "last_review"
+    - "host_since"
+
+  encode_onehot:
+    - "city"
+    - "room_type"
+    - "property_type"
+    - "bed_type"
+    - "cancellation_policy"
+
+  encode_label:
+    - "zipcode"
+    - "neighbourhood"
+
+training:
+  xgboost:
+    n_estimators: 500
+    max_depth: 6
+    learning_rate: 0.1
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+    n_jobs: -1
+
+  cv_folds: 5
+  random_search_iter: 50
+
+paths:
+  model_save: "models/xgboost_best.joblib"
+  feature_names: "artifacts/feature_names.json"
+  performance_csv: "artifacts/model_performance.csv"
+  scaler_save: "artifacts/scaler.joblib"

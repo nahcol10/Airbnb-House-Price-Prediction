@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "airbnb-price-predictor"
+version = "0.1.0"
+description = "Predict Airbnb listing prices using XGBoost with a production-style project structure."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "ML Team", email = "ml@example.com"},
+]
+keywords = ["airbnb", "price-prediction", "xgboost", "machine-learning"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "scikit-learn>=1.3",
+    "xgboost>=2.0",
+    "lightgbm>=4.0",
+    "matplotlib>=3.7",
+    "seaborn>=0.12",
+    "missingno>=0.5",
+    "pyyaml>=6.0",
+    "joblib>=1.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "jupyter>=1.0",
+    "pytest>=7.4",
+    "black>=23.0",
+    "flake8>=6.0",
+    "mypy>=1.5",
+]
+
+[project.scripts]
+airbnb = "main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
